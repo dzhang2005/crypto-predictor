@@ -31,3 +31,4 @@ Thumbs.db
 *.csv
 data/
 models/
+crypto_env/

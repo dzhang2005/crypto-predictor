@@ -1,0 +1,5 @@
+# Contents of `test_setup.py`:
+
+# (Please re-save this file as UTF-8 without BOM using a suitable text editor.)
+
+print("Setup complete.")
