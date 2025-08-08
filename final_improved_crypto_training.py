@@ -246,7 +246,7 @@ class FinalImprovedCryptoPredictor:
         
         logger.info(f"Initialized predictor for {coin_symbol}")
         
-    def fetch_and_prepare_data(self, period='2y'):
+    def fetch_and_prepare_data(self, period='730d', interval='1h'):
         """
         Fetch data and prepare features
         """
@@ -254,7 +254,7 @@ class FinalImprovedCryptoPredictor:
         
         # Fetch price data
         ticker = yf.Ticker(self.coin_symbol)
-        df = ticker.history(period=period)
+        df = ticker.history(period=period, interval=interval)
         
         if df.empty:
             raise ValueError("No data fetched")
@@ -552,15 +552,15 @@ def main():
     predictor = FinalImprovedCryptoPredictor(
         coin_symbol='BTC-USD',
         lookback_days=30,
-        hidden_size=64
+        hidden_size=128  # Increase model size
     )
     
     # Train model
     history = predictor.train(
-        epochs=150,
-        batch_size=32,
+        epochs=1000,         # Much longer training
+        batch_size=256,      # Larger batch size for GPU
         lr=0.001,
-        patience=20
+        patience=100         # Less sensitive early stopping
     )
     
     # Make prediction
